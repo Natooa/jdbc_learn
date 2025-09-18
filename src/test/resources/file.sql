@@ -8,3 +8,4 @@
 # INSERT INTO users(name, age, email) VALUES ('steve', 55, 'steve@gmail,com');
 
 # SELECT * FROM users;
+SELECT * FROM animal;
