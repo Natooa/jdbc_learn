@@ -8,4 +8,6 @@
 # INSERT INTO users(name, age, email) VALUES ('steve', 55, 'steve@gmail,com');
 
 # SELECT * FROM users;
-SELECT * FROM animal;
+# SELECT * FROM animal;
+# INSERT INTO users(username, password) VALUES ('test', 'test');
+INSERT INTO users(username, password) VALUES ('Steve', 'root');

@@ -1,33 +1,27 @@
 package com.natooa.jdbc;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Main {
+    public static void main(String[] args) {
+        DatabaseConnection databaseConnection = new DatabaseConnection();
 
-    private static final String URL = "jdbc:mysql://localhost:3306/jdbc_learn";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "Natooa1407%";
+        String query = "SELECT * FROM users WHERE user_id = 2";
+        try {
+            Statement statement = databaseConnection.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
 
-    public static void main(String[] args) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+            while(resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("user_id"));
+                user.setUsername(resultSet.getString("username"));
+                user.setPassword(resultSet.getString("password"));
 
-        try(Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD); Statement statement =  connection.createStatement()) {
-//            statement.execute("INSERT INTO animal (animal_name, anime_desc) VALUES ('name', 'description');");
-
-//            int  res = statement.executeUpdate("UPDATE animal SET animal_name = 'New name' WHERE animal_id = 1");
-//            System.out.println(res);
-
-//            ResultSet res = statement.executeQuery("SELECT * FROM animal");
-
-//            statement.addBatch("INSERT INTO animal (animal_name, anime_desc) VALUES ('lion', 'king of animal'), ('monkey', 'bibizyana'), ('tiger', 'bars');");
-//            statement.executeBatch();
-//            statement.clearBatch();
-//            boolean status = statement.isClosed();
-//            System.out.println(status);
-
-            statement.close();
-
-        }catch (SQLException e) {
+                System.out.println(user);
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
